@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animal Shelter{% endblock %}
+
+
+{% block body %}
+<main class="container">
+    <section class="row">
+        <div class="col-12">
+            <h1>Animal Shelter</h1>
+            <p>Bienvenue sur notre site</p>
+        </div>
+    {% for race in races %}
+
+    {% if race.parent == null %}
+    <div class="col-12">
+       <h2> {{ race.name}} </h2>
+    </div>
+
+    {% else %}
+        <div class="col-3">
+            <div class="card h-100">
+                <h3 class="card-title">{{ race.name}} </h3>
+                <a href="{{ path('races_list', {slug: race.slug}) }}" class="btn btn-primary">Voir les Animaux</a>
+        </div>
+            </div>
+    {% endif %}
+     
+    {% endfor %}
+
+
+        <div class="col-12">
+        </div>
+    </section>
+</main>
+
+{% endblock %}

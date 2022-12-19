@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des animaux de la race {{race.name}}{% endblock %}
+
+{% block body %}
+<main class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Liste des animaux de la race {{race.name}}</h1>
+        </div>
+        {% for animal in animals %}
+        <div class="col-3 mb-3">
+            <article class="card h-100">
+                <div class="card-body">
+                   <h2>{{ animal.name }}</h2> 
+                   <p class="card-text">{{ animal.description }}</p>
+                   <a href="#" class="btn btn-primary">Voir les détails</a>
+                </div>
+            </article>
+        </div>
+         
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
