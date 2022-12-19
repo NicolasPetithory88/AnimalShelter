@@ -1,7 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Details de {{ animal.name }}  {% endblock %}
+{% block title %}Details de {{ animal.name }}{% endblock %}
 
 {% block body %}
-<h1>Details de {{ animal.name }}  </h1>
+<main class="container">
+    <section class="row">
+        <div class="col-12">
+            <h1>{{ animal.name }} </h1>
+        </div>
+        <div class="col-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-indicators">
+
+    {% for iteration in 1..animal.images | length %}
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ iteration - 1 }}" {{ (loop.first ) ? 'class="active" aria-current="true"' : '' }}  aria-label="Slide {{ iteration }}"></button>
+    {% endfor %}
+
+  </div>
+  <div class="carousel-inner">
+    {% for image in animal.images %}
+        <div class="carousel-item {{ (loop.first == 0) ? 'active' : '' }}">
+            <img src="{{ asset('assets/uploads/') ~ image.name }}" class="d-block w-100" alt="{{ animal.name }}">
+        </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+        </div>
+        <div class="col-6">
+            <p>{{ animal.description }}</p>
+            <p>Espèce : {{ animal.races.parent.name }}</p>
+            <p>Race : {{ animal.races.name }}</p>
+            <p>Sexe : {{ animal.sex.name }}</p>
+            <p>Parrainages : {{ (animal.sponsorships)? animal.sponsorships : 0 }}</p>
+            <pre>
+                 {{ dump(animal.sponsorships) }}
+            </pre>
+            {% if animal.status.name == "En refuge" %}
+                <a href="" class="btn btn-success">Adopter</a>
+                <a href="" class="btn btn-success">Parrainer</a>
+            {% elseif animal.status.name == "Perdu" %}
+                <p class="text-danger">Perdu</p>
+            {% else %}
+                <p class="text-danger">En cours d'adoption</p>
+            {% endif %}
+            
+        </div>
+    </section>
+</main>
+
 {% endblock %}

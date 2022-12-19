@@ -14,7 +14,7 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for($i = 1 ; $i <= 100; $i++){
+        for($i = 1 ; $i <= 10; $i++){
             $img = new Images();
             $img->setName($faker->image(null, 640, 480));
             $animal = $this->getReference('animal-'.rand(1,10));
@@ -31,3 +31,4 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 }
+

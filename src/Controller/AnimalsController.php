@@ -19,10 +19,10 @@ class AnimalsController extends AbstractController
     }
 
     #[Route('/{slug}', name: 'details')]
-    public function details(Animals $animals): Response
+    public function details(Animals $animal): Response
     {
         return $this->render('animals/details.html.twig', [
-            'animal' => $animals,
+            'animal' => $animal,
         ]);
     }
 }
